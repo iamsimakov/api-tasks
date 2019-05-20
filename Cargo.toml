@@ -1,13 +1,22 @@
 [package]
-name = "hero-api"
+name = "tasks-api"
 version = "0.1.0"
-authors = ["sean"]
+authors = ["iamsimakov"]
 
 [dependencies]
-rocket = "0.3"
-rocket_codegen = "0.3"
-rocket_contrib = "0.3"
-serde = "1.0"
-serde_derive = "1.0"
-serde_json = "1.0"
-diesel = { version = "1.0.0", features = ["mysql", "r2d2"] }
+rocket = "0.4.1"
+serde = "1.0.91"
+serde_derive = "1.0.91"
+serde_json = "1.0.39"
+diesel = { version = "1.4.2", features = ["mysql", "r2d2"] }
+diesel_migrations = "1.4.0"
+log = "0.4"
+
+[dev-dependencies]
+parking_lot = { version = "0.8", features = ["nightly"] }
+rand = "0.6"
+
+[dependencies.rocket_contrib]
+version = "0.4.1"
+default_features = false
+features = ["diesel_mysql_pool"]

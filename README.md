@@ -1,38 +1,25 @@
 # Rocket, Diesel, MySQL, Rest API Tutorial
 
-Build Restful CRUD API for a managing heroes within our Database using Rocket and Diesel.
+Build Restful CRUD API within our Database using Rocket and Diesel.
 
-## Requirements
-
-1. Rust and Cargo - 1.26.0 (nightly)
-
-2. Diesel CLI - 1.1.0
-
-2. Mysql - 5.x.x
-
-## Steps to Setup
+## Steps to Setup on your machine
 
 **1. Clone the application**
 
 ```bash
-git clone https://github.com/sean3z/rocket-diesel-rest-api-example.git
+git clone git@github.com:iamsimakov/rocket-diesel-rest-api-example.git
 ```
 
 **2. Create DATABASE_URL environment variable**
 ```
-export DATABASE_URL=mysql://user:pass@localhost/heroes
+export DATABASE_URL=mysql://tasks_api:apitasks@dbrw/tasks_api
 ```
 
-**3. Run Database migration**
-```bash
-diesel migration run
-```
-
-**4. Build and run the app using cargo**
+**3. Build and run the app using cargo**
 
 ```bash
 cargo build --release && cd target/release/
-sudo ROCKET_ENV=prod ./hero-api
+sudo ROCKET_ENV=prod ./tasks-api
 ```
 
 The app will start running at <http://localhost:80>.
@@ -43,22 +30,36 @@ Alternatively, you can run the app in development mode -
 cargo run
 ```
 
+## Steps to Run dev on your machine
+
+**1. Clone the application**
+
+```bash
+git clone git@github.com:iamsimakov/rocket-diesel-rest-api-example.git
+```
+
+**2. Install docker, docker-compose**
+
+https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+**3. Run**
+
+```bash
+docker-compose up -d --build
+```
+
 ## Explore Rest APIs
 
 The app defines following CRUD APIs.
 
-    GET /heroes
+    GET /tasks
     
-    POST /hero
+    POST /tasks
     
-    PUT /hero/{heroId}
+    PUT /tasks/{taskId}
     
-    DELETE /hero/{heroId}
+    DELETE /tasks/{taskId}
 
 You can test them using postman or any other rest client.
 
-## Learn more
-
-You can find the tutorial for this application on my blog -
-
-<https://medium.com/p/1867308352d8/>
+Based on git@github.com:sean3z/rocket-diesel-rest-api-example.git

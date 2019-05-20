@@ -1,0 +1,2 @@
+[global.databases]
+mysql_db = { url = "mysql://tasks_api:apitasks@dbrw/tasks_api", pool_size = 10 }

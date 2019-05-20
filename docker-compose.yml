@@ -1,0 +1,28 @@
+version: '3.4'
+services:
+  dbrw:
+    image: mysql:5.7.24
+    volumes:
+      - tasks_api_db:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    environment:
+      MYSQL_USER: tasks_api
+      MYSQL_PASSWORD: apitasks
+      MYSQL_DATABASE: tasks_api
+      MYSQL_ROOT_PASSWORD: superPassWoRd
+
+  api:
+    build: ./
+    volumes:
+      - ./:/app
+    environment:
+      DATABASE_URL: mysql://tasks_api:apitasks@dbrw/tasks_api
+    depends_on:
+      - dbrw
+    ports:
+      - 3000:80
+    command: cargo run
+
+volumes:
+  tasks_api_db:
+    driver: local
