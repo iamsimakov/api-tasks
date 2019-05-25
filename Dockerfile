@@ -4,9 +4,10 @@ FROM rustlang/rust:nightly
 RUN mkdir /app
 
 WORKDIR /app
-COPY Cargo.toml Cargo.lock ./
-RUN cargo install --path .
+# ADD src /app/src
+# COPY Cargo.toml Cargo.lock ./
+# RUN cargo install --path .
 
 COPY . ./
-
+EXPOSE 8000
 CMD ["cargo", "run"]

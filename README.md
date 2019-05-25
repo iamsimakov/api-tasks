@@ -9,12 +9,6 @@ Build Restful CRUD API within our Database using Rocket and Diesel.
 ```bash
 git clone git@github.com:iamsimakov/rocket-diesel-rest-api-example.git
 ```
-
-**2. Create DATABASE_URL environment variable**
-```
-export DATABASE_URL=mysql://tasks_api:apitasks@dbrw/tasks_api
-```
-
 **3. Build and run the app using cargo**
 
 ```bash

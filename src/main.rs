@@ -9,7 +9,6 @@
 
 // // #[cfg(test)] mod tests;
 
-// use rocket_contrib::json::{Json, JsonValue};
 // use rocket::fairing::AdHoc;
 
 // mod db;
@@ -63,34 +62,39 @@
 #[macro_use] extern crate rocket;
 #[macro_use] extern crate rocket_contrib;
 
-mod task;
+// mod task;
+// use task::Task;
 
-use task::Task;
 use rocket_contrib::databases::diesel;
+// use rocket_contrib::json::{Json, JsonValue};
+use rocket_contrib::json::JsonValue;
 
 #[database("mysql_db")]
 struct DbConn(diesel::MysqlConnection);
 
 #[get("/")]
-fn index(connection: DbConn) -> Json<JsonValue> {
-    Json(json!(Task::read(&connection)))
+fn index(connection: DbConn) -> JsonValue {
+    // Json(json!(Task::read(&connection)))
+    json!({
+        "id": 83,
+        "values": [1, 2, 3, 4]
+    })
 }
 
-fn run_db_migrations(rocket: Rocket) -> Result<Rocket, Rocket> {
-    let conn = DbConn::get_one(&rocket).expect("database connection");
-    match embedded_migrations::run(&*conn) {
-        Ok(()) => Ok(rocket),
-        Err(e) => {
-            error!("Failed to run database migrations: {:?}", e);
-            Err(rocket)
-        }
-    }
-}
-
+// fn run_db_migrations(rocket: Rocket) -> Result<Rocket, Rocket> {
+//     let conn = DbConn::get_one(&rocket).expect("database connection");
+//     match embedded_migrations::run(&*conn) {
+//         Ok(()) => Ok(rocket),
+//         Err(e) => {
+//             error!("Failed to run database migrations: {:?}", e);
+//             Err(rocket)
+//         }
+//     }
+// }
+// .attach(AdHoc::on_attach("Database Migrations", run_db_migrations))
 fn main() {
     rocket::ignite()
        .attach(DbConn::fairing())
-       .attach(AdHoc::on_attach("Database Migrations", run_db_migrations))
        .mount("/", routes![index])
        .launch();
 }
