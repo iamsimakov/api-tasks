@@ -2,4 +2,4 @@
 address = "0.0.0.0"
 
 [global.databases]
-mysql_db = { url = "mysql://tasks_api:apitasks@dbrw/tasks_api", pool_size = 10 }
+mysql_db = { url = "mysql://root@dbrw/tasks_api", pool_size = 10 }

@@ -1,6 +1,6 @@
 table! {
-    tasks {
-        id -> Nullable<Integer>,
+    tasks (id) {
+        id -> Integer,
         desc -> Varchar,
         content -> Varchar,
     }
